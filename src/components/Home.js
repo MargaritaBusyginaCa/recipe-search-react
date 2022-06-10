@@ -5,10 +5,29 @@ import "../index.css"
 import RecipeDetails from "./RecipeDetails"
 
 
-function Home({recipes, setRecipes, load, setLoad}){
+function Home(){
     const PER_PAGE = 5
     const [currentPage, setCurrentPage] = useState(0)
     const [formData, setFormData] =useState("")
+    const [recipes, setRecipes] = useState([])
+    const [queryNum, setQueryNum] = useState(60)
+    const [load, setLoad] = useState(false)
+    const isMounted = useRef(false)
+    let apiKey = "c946f13b6a314b0c99f9ab874a602aa7"
+    
+    //https://api.spoonacular.com/recipes/654959/information?apiKey=e0a3d83a76cd454fad56b15153d1d5f6"
+    
+    let url = `https://api.spoonacular.com/recipes/complexSearch?query=${formData}&apiKey=${apiKey}&number=${queryNum}`
+    useEffect(() =>{
+      if(isMounted.current){
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setRecipes(data.results))
+      }else{
+        isMounted.current = true
+      }
+      
+    }, [load])
 
     function handleOnChange(e){
         e.preventDefault()
@@ -17,10 +36,8 @@ function Home({recipes, setRecipes, load, setLoad}){
     }
     function findRecipes(){
         setLoad(prevLoad => !prevLoad)
-        console.log(load)
     }
     function handlePageClick({selected:selectedPage}){
-        console.log("selected page: ", selectedPage)
         setCurrentPage(selectedPage)
     }
     const offset = currentPage * PER_PAGE
