@@ -1,13 +1,17 @@
 import React, {useState, useEffect, useRef} from "react"
 import {Link, Routes, Route} from 'react-router-dom'
+import ReactPaginate from 'react-paginate'
 
 function App(){
+    const PER_PAGE = 10
     const [recipes, setRecipes] = useState([])
+    const [currentPage, setCurrentPage] = useState(0)
     const [formData, setFormData] =useState("")
-    const [queryNum, setQueryNum] = useState(10)
+    const [queryNum, setQueryNum] = useState(60)
     const [load, setLoad] = useState(false)
     const isMounted = useRef(false)
     let apiKey = "e0a3d83a76cd454fad56b15153d1d5f6"
+    
     //https://api.spoonacular.com/recipes/654959/information?apiKey=6b0b1262b4284a6bb7255205dff10a83"
     
     let url = `https://api.spoonacular.com/recipes/complexSearch?query=${formData}&apiKey=${apiKey}&number=${queryNum}`
@@ -22,7 +26,7 @@ function App(){
       }
       
     }, [load])
-
+    
     function handleOnChange(e){
         e.preventDefault()
         setFormData(e.target.value)
@@ -32,15 +36,22 @@ function App(){
         setLoad(prevLoad => !prevLoad)
         console.log(load)
     }
-    let recipesDisplay = recipes.map(r =>{
+    function handlePageClick({selected:selectedPage}){
+        console.log("selected page: ", selectedPage)
+        setCurrentPage(selectedPage)
+    }
+    const offset = currentPage * PER_PAGE
+    const currentPageData = recipes
+      .slice(offset, offset + PER_PAGE)
+      .map(r =>{
         return(
-            
             <div key={r.id} className="recipe-display-container">
                 <h2>{r.title}</h2>
                 <img src={r.image}/>
             </div> 
         )
-    })
+      })
+    const pageCount = Math.ceil(recipes.length / PER_PAGE)
     return(
         <div>
             <div>
@@ -54,9 +65,23 @@ function App(){
                 />
                 <button type="button" onClick={findRecipes} className="submit-btn"></button>
               </form>
-              {recipesDisplay}
             </div>
-
+            {currentPageData}
+            {recipes.length > 0 ? 
+            <ReactPaginate 
+            previousLabel = {"< Previous"}
+            nextLabel="next >"
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            containerClassName={"page-container"}
+            previousLinkClassName={"page-link"}
+            nextLinkClassName={"page-link"}
+            activeClassName={"page-link--active"}
+            disabledClassName={"page-link--disabled"}
+         />
+         : <div>Hello</div>
+        }
+            
             {/* <Routes>
                 <Route path="/:recipeId"></Route>
             </Routes> */}
