@@ -1,19 +1,26 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import {Link, Routes, Route} from 'react-router-dom'
+
 function App(){
     const [recipes, setRecipes] = useState([])
     const [formData, setFormData] =useState("")
     const [queryNum, setQueryNum] = useState(10)
     const [load, setLoad] = useState(false)
-    let apiKey = "6b0b1262b4284a6bb7255205dff10a83"
+    const isMounted = useRef(false)
+    let apiKey = "e0a3d83a76cd454fad56b15153d1d5f6"
     //https://api.spoonacular.com/recipes/654959/information?apiKey=6b0b1262b4284a6bb7255205dff10a83"
     
     let url = `https://api.spoonacular.com/recipes/complexSearch?query=${formData}&apiKey=${apiKey}&number=${queryNum}`
     useEffect(() =>{
-      fetch(url)
-      .then(res => res.json())
-      .then(data => setRecipes(data.results))
-      console.log(recipes)
+      if(isMounted.current){
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setRecipes(data.results))
+        console.log("Api loaded")
+      }else{
+        isMounted.current = true
+      }
+      
     }, [load])
 
     function handleOnChange(e){
@@ -27,10 +34,11 @@ function App(){
     }
     let recipesDisplay = recipes.map(r =>{
         return(
-            <div key={r.id}>
+            
+            <div key={r.id} className="recipe-display-container">
                 <h2>{r.title}</h2>
                 <img src={r.image}/>
-            </div>
+            </div> 
         )
     })
     return(
