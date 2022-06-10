@@ -1,3 +1,15 @@
 .card{
     display: block;
 }
+.page-container{
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    list-style: none;
+    cursor: pointer;
+}
+.page-container a{
+    padding: 10px;
+    border: 1px solid black;
+    color: blueviolet;
+}
