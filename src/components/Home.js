@@ -12,13 +12,15 @@ function Home(){
     const [recipes, setRecipes] = useState([])
     const [queryNum, setQueryNum] = useState(60)
     const [load, setLoad] = useState(false)
+    const [filterParam, setFilterParam] = useState("")
     const isMounted = useRef(false)
     let apiKey = "c946f13b6a314b0c99f9ab874a602aa7"
     
     //https://api.spoonacular.com/recipes/654959/information?apiKey=e0a3d83a76cd454fad56b15153d1d5f6"
     
-    let url = `https://api.spoonacular.com/recipes/complexSearch?query=${formData}&apiKey=${apiKey}&number=${queryNum}`
+    let url = `https://api.spoonacular.com/recipes/complexSearch?query=${formData}&cuisine=${filterParam}&apiKey=${apiKey}&number=${queryNum}`
     useEffect(() =>{
+      
       if(isMounted.current){
         fetch(url)
         .then(res => res.json())
@@ -26,7 +28,6 @@ function Home(){
       }else{
         isMounted.current = true
       }
-      
     }, [load])
 
     function handleOnChange(e){
@@ -60,8 +61,7 @@ function Home(){
     const pageCount = Math.ceil(recipes.length / PER_PAGE)
     return(
         <div>
-            <div>
-              <form>
+              <form className="form-data-container">
                 <input type="text"
                        value={formData}
                        autoComplete="off"
@@ -71,7 +71,46 @@ function Home(){
                 />
                 <button type="button" onClick={findRecipes} className="submit-btn"></button>
               </form>
+
+            <div className="drop-menu">
+            <select
+               onChange={(e) => {
+               setFilterParam(e.target.value)
+
+               }}
+                className="custom-select"
+                aria-label="Filter By Cuisine">
+            <option value="All">All</option>        
+            <option value="African">African</option>
+            <option value="American">American</option>
+            <option value="British">British</option>
+            <option value="Cajun">Cajun</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Eastern European">Eastern European</option>
+            <option value="European">European</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+            <option value="Greek">Greek</option>
+            <option value="Indian">Indian</option>
+            <option value="Irish">Irish</option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Jewish">Jewish</option>
+            <option value="Korean">Korean</option>
+            <option value="French">Latin American</option>
+            <option value="Mediterranean">Mediterranean</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Middle Eastern">Middle Eastern</option>
+            <option value="Nordic">Nordic</option>
+            <option value="Southern">Southern</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Thai">Thai</option>
+            <option value="Vietnamese">Vietnamese</option>
+            </select>
+            <span className="focus"></span>
             </div>
+
             {currentPageData}
             {recipes.length > 0 ? 
             <ReactPaginate 

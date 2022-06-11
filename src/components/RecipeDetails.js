@@ -10,23 +10,8 @@ function RecipeDetails({recipes}){
        fetch(url)
        .then(res => res.json())
        .then(data => setRecipeDetails(data))
-       
+      
    }, [recipeId])
-    // console.log(typeof recipeDetails.analyzedInstructions.steps)
-    // const stepsDisplay = recipeDetails.analyzedInstructions?.map(instruction =>{
-    //     instruction.steps.map(s =>{
-           
-    //         return(
-    //          <div className="recipe-steps">
-    //            <div>
-    //               <ol>
-    //                 <li>{s.step}</li>
-    //               </ol>
-    //            </div>
-    //           </div>
-    //        )
-    //     })
-    // })
 
 const ingredientsDisplay = recipeDetails.extendedIngredients?.map(i =>{
     return(
