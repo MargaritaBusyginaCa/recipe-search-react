@@ -4,13 +4,12 @@ import ReactPaginate from 'react-paginate'
 import "../index.css"
 import RecipeDetails from "./RecipeDetails"
 
-
 function Home(){
-    const PER_PAGE = 5
+    const PER_PAGE = 6
     const [currentPage, setCurrentPage] = useState(0)
     const [formData, setFormData] =useState("")
     const [recipes, setRecipes] = useState([])
-    const [queryNum, setQueryNum] = useState(60)
+    const [queryNum, setQueryNum] = useState(80)
     const [load, setLoad] = useState(false)
     const [filterParam, setFilterParam] = useState("")
     const isMounted = useRef(false)
@@ -46,14 +45,12 @@ function Home(){
       .slice(offset, offset + PER_PAGE)
       .map(r =>{
         return(
-            <div key={r.id}>
-            <Link to={`/${r.id}`}>
-             <div key={r.id} className="recipe-display-container">
+            <div key={r.id} className="recipe-display-container">
+            <Link to={`/${r.id}`} className="recipe-link">
              <span className="card">
                  <h2>{r.title}</h2>
                  <img src={r.image}/>
               </span>
-             </div> 
             </Link>
             </div>
         )
@@ -61,25 +58,15 @@ function Home(){
     const pageCount = Math.ceil(recipes.length / PER_PAGE)
     return(
         <div>
-              <form className="form-data-container">
-                <input type="text"
-                       value={formData}
-                       autoComplete="off"
-                       name="recipe"
-                       placeholder="Search for new recipes"
-                       onChange={handleOnChange}
-                />
-                <button type="button" onClick={findRecipes} className="submit-btn"></button>
-              </form>
+           <div className="header">
+              <p className="logo">FoodGuru</p>
+
+            <div className="search-filter">
 
             <div className="drop-menu">
-            <select
-               onChange={(e) => {
-               setFilterParam(e.target.value)
-
-               }}
-                className="custom-select"
-                aria-label="Filter By Cuisine">
+            <select onChange={(e) => {setFilterParam(e.target.value)}}
+                    className="custom-select"
+                    aria-label="Filter By Cuisine">
             <option value="All">All</option>        
             <option value="African">African</option>
             <option value="American">American</option>
@@ -111,11 +98,28 @@ function Home(){
             <span className="focus"></span>
             </div>
 
-            {currentPageData}
-            {recipes.length > 0 ? 
+              <form className="form-data-container">
+                <input type="text"
+                       value={formData}
+                       autoComplete="off"
+                       name="recipe"
+                       placeholder="Search for new recipes"
+                       onChange={handleOnChange}
+                />
+                <button type="button" onClick={findRecipes} className="submit-btn">Search</button>
+              </form>
+            
+              </div>
+
+            </div>
+            <div className="flex-current-page">
+             <div className="current-page-data">
+              {currentPageData}
+             </div>
+             {recipes.length > 0 ? 
             <ReactPaginate 
             previousLabel = {"< Previous"}
-            nextLabel="next >"
+            nextLabel="Next >"
             pageCount={pageCount}
             onPageChange={handlePageClick}
             containerClassName={"page-container"}
@@ -124,8 +128,17 @@ function Home(){
             activeClassName={"page-link--active"}
             disabledClassName={"page-link--disabled"}
          />
-         : <div>Hello</div>
+         : <div className="welcome--container">
+            <div className="welcome-text">
+             <h2>Search for amazing recipes for every ocasion</h2>
+             <p>Vegeterian and Vegan Safe</p>
+             <p>Variety of cusines</p>
+             </div>
+           </div>
         }
+            </div>
+            
+           
             
         </div>
     )

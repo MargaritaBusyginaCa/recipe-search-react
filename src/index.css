@@ -1,15 +1,144 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color:#EFF1F5 ;
+}
+.logo{
+   font-family: 'League Spartan', sans-serif;
+   font-size: 36px;
+   margin: 30px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search-filter{
+    display: flex;
+    margin: 30px;
+}
+.custom-select{
+   padding: 10px;
+   border: 1px solid rgb(255, 255, 255);
+   border-radius: 10px;
+   margin-right: 40px;
+}
+input{
+  padding: 10px;
+  max-width: 250px;
+  border: 1px solid rgb(255, 255, 255);
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.submit-btn{
+   padding: 10px;
+   margin: 0;
+   border-bottom-right-radius: 10px;
+   border-top-right-radius: 10px;
+   border: 1px solid white;
+   background-color: white;
+   cursor: pointer;
+   margin-right: 20px;
+}
+.welcome--container{
+    width: 100%;
+    height: 75vh;
+    background: linear-gradient(rgba(255, 255, 255, 0.569), rgba(255, 255, 255, 0.284)),url("https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+    background-position: center;
+    background-size: cover;  
+}
+.welcome-text{
+    width: 70%;
+    padding: 4rem;
+}
+.welcome-text p{
+    font-style: italic;
+}
+.flex-current-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.current-page-data{
+    display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: center;
+    padding: 1rem;
+}
+
+.recipe-display-container img{
+    width: 220px;
+    height: 228px;
+    border-radius: 15px;
+}
+.recipe-display-container h2{
+    width: 300px;
+    font-size: 17px;
+
+}
+.recipe-display-container{
+    max-width: 260px;
+}
+.recipe-link{
+   text-decoration: none; 
+   color: inherit;
+}
 .card{
     display: block;
+    max-width: 260px;
 }
 .page-container{
     display: flex;
-    max-width: 500px;
-    margin: 0 auto;
+    justify-content: center;
     list-style: none;
     cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    padding-top: 20px;
 }
 .page-container a{
-    padding: 10px;
-    border: 1px solid black;
-    color: blueviolet;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.page-container a:focus{
+    background-color: #4c98af;
+    color: white;
+}
+.page-container a:hover:not(:focus){
+    background-color: rgb(207, 213, 218);
+}
+/* Recipe Details Page*/
+.back-btn{
+    width: 30px;
+    height: 30px;
+}
+.recipe-details-main{
+    width: 90%;
+    margin: 0 auto;
+}
+.recipe-primary-info{
+    margin-top: 20px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.title-ingredients-info{
+    margin-left: 50px;
+    padding: 30px;
+    border-radius: 10px; 
+}
+.instructions{
+    width: 80%;
+    font-size: 20px;
+    padding: 1rem;
 }

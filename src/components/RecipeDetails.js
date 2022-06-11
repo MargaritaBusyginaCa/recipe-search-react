@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
 import { useParams } from "react-router-dom"
 import App from "./App"
+import {Link, Routes, Route} from 'react-router-dom'
 
 function RecipeDetails({recipes}){
   const {recipeId} = useParams()
@@ -10,46 +11,36 @@ function RecipeDetails({recipes}){
        fetch(url)
        .then(res => res.json())
        .then(data => setRecipeDetails(data))
-      
    }, [recipeId])
 
 const ingredientsDisplay = recipeDetails.extendedIngredients?.map(i =>{
     return(
       <div className="ingredient-container" key={i.id}>
-        <p className="ingredient-amount">{i.original}</p>
+         <ul className="ingredients-list">
+          <li>{i.original}</li>
+         </ul>
       </div>  
     )
 })
-
-var displayIngredients = function (){
-    let stepsArr = []
-    if(recipeDetails.analyzedInstructions){
-        for(let i = 0; i < recipeDetails.analyzedInstructions.length; i++){
-            stepsArr =  recipeDetails.analyzedInstructions[i].steps.map(s =>{
-                return(
-                    <div className="recipe-steps">
-                     <p>{s.step}</p>           
-                    </div>   
-                )
-            })
-        }
-    }
-    // for(let i = 0; i < arr.length; i++){
-    //     console.log(i)
-    // }
-}
-
   return(
     <div className="recipe-details-main">
-        <div>
-            <img src={recipeDetails.image}/>
-        </div>
-        <div>
-          <h1>{recipeDetails.title}</h1>
-          {ingredientsDisplay}
-          {displayIngredients}
-        </div>
+        <p className="logo">FoodGuru</p>
+        <Link to="/">
+          <img src={"https://cdn-icons-png.flaticon.com/512/93/93634.png"} 
+               className="back-btn"/>
+          </Link>
+        <div className="recipe-primary-info">
+         <div>
+             <img src={recipeDetails.image}/>
+         </div>
+         <div className="title-ingredients-info">
+           <h1>{recipeDetails.title}</h1>
+           <h2>Ingredients:</h2>
+           {ingredientsDisplay}
+         </div>
+        </div>  
         <div className="instructions">
+          <h3>Instructions</h3>
           <p dangerouslySetInnerHTML={{__html: recipeDetails.instructions}}/>
         </div>
     </div>
