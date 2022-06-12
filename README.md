@@ -13,7 +13,7 @@
 ![Design preview](./img/foodguru-2.PNG)
 
 ## Read more abouut the recipe
-![Design preview](./img/foodguru-3.PNG
+![Design preview](./img/foodguru-3.PNG)
 
 ## Live Version
 
