@@ -12,7 +12,7 @@
 ## Search Recipies of Different Cuisines
 ![Design preview](./img/foodguru-2.PNG)
 
-## Read more abouut the recipe
+## Read more about the recipe
 ![Design preview](./img/foodguru-3.PNG)
 
 ## Live Version
