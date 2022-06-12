@@ -143,9 +143,10 @@ function Home(){
                <img src={"https://cdn-icons.flaticon.com/png/512/4315/premium/4315445.png?token=exp=1655000007~hmac=e52a85ee94efc62add21b994bbb1b890"}/>
                <h3>Vegeterian and Vegan Safe</h3>
               </div>
-            
-             
+              
              </div>
+             <div className="author"> <p>Completed by Margarita Busygina, June 2022</p></div>
+            
            </div>
         }
             </div>
