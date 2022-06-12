@@ -136,11 +136,11 @@ function Home(){
             <div className="welcome-text">
                <h1>Search for amazing recipes for every ocasion</h1>
               <div className="safe-info">
-               <img src={"https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1654997820~hmac=f43fdda87355f8545bff9f5d76ee0c69"}/>
+               <img src={"https://cdn-icons.flaticon.com/png/512/4315/premium/4315445.png?token=exp=1655000007~hmac=e52a85ee94efc62add21b994bbb1b890"}/>
                <h3>Variety of cusines</h3>
               </div>
               <div className="safe-info">
-               <img src={"https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1654997820~hmac=f43fdda87355f8545bff9f5d76ee0c69"}/>
+               <img src={"https://cdn-icons.flaticon.com/png/512/4315/premium/4315445.png?token=exp=1655000007~hmac=e52a85ee94efc62add21b994bbb1b890"}/>
                <h3>Vegeterian and Vegan Safe</h3>
               </div>
             
