@@ -1,12 +1,11 @@
-import React, {useState, useEffect, useRef} from "react"
+import React, {useState, useEffect} from "react"
 import { useParams } from "react-router-dom"
-import App from "./App"
-import {Link, Routes, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 function RecipeDetails({recipes}){
   const {recipeId} = useParams()
   const [recipeDetails, setRecipeDetails] = useState([])
-   let url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=c946f13b6a314b0c99f9ab874a602aa7`
+   let url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=d5e511051f14404bb8c1647c9505e18f`
    useEffect(() =>{
        fetch(url)
        .then(res => res.json())
@@ -24,15 +23,18 @@ const ingredientsDisplay = recipeDetails.extendedIngredients?.map(i =>{
 })
   return(
     <div className="recipe-details-main">
-        <p className="logo">FoodGuru</p>
-        <Link to="/">
-          <img src={"https://cdn-icons-png.flaticon.com/512/93/93634.png"} 
-               className="back-btn"/>
-          </Link>
+        <Link to="/"><p className="logo">FoodGuru</p></Link>
         <div className="recipe-primary-info">
          <div>
              <img src={recipeDetails.image}/>
+           <div className="tags">
+             {recipeDetails.glutenFree && <p>gluten free</p>}
+             {recipeDetails.veryHealthy && <p>very healthy</p>}
+             {recipeDetails.vegan && <p>vegan</p>}
+             {recipeDetails.vegetarian && <p>vegetarian</p>}
+            </div>   
          </div>
+         
          <div className="title-ingredients-info">
            <h1>{recipeDetails.title}</h1>
            <h2>Ingredients:</h2>

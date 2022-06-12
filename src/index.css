@@ -10,10 +10,12 @@ body{
    font-family: 'League Spartan', sans-serif;
    font-size: 36px;
    margin: 30px;
+   text-decoration: none;
+   cursor: pointer;
 }
 .header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 .search-filter{
@@ -28,7 +30,7 @@ body{
 }
 input{
   padding: 10px;
-  max-width: 250px;
+  width: 300px;
   border: 1px solid rgb(255, 255, 255);
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
@@ -57,6 +59,15 @@ input{
 .welcome-text p{
     font-style: italic;
 }
+.safe-info {
+    display: flex;
+    align-items: center;
+}
+.safe-info img{
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
 .flex-current-page{
     display: flex;
     flex-direction: column;
@@ -65,15 +76,16 @@ input{
 }
 .current-page-data{
     display: grid;
-    gap: 60px;
-    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    grid-template-columns: repeat(3, 400px);
     align-content: center;
     padding: 1rem;
+    text-align: center;
 }
 
 .recipe-display-container img{
-    width: 220px;
-    height: 228px;
+    width: 320px;
+    height: 328px;
     border-radius: 15px;
 }
 .recipe-display-container h2{
@@ -97,8 +109,7 @@ input{
     justify-content: center;
     list-style: none;
     cursor: pointer;
-    position: absolute;
-    bottom: 0px;
+    
     padding-top: 20px;
 }
 .page-container a{
@@ -115,13 +126,13 @@ input{
     background-color: rgb(207, 213, 218);
 }
 /* Recipe Details Page*/
-.back-btn{
-    width: 30px;
-    height: 30px;
-}
 .recipe-details-main{
     width: 90%;
     margin: 0 auto;
+}
+.recipe-details-main a{
+    text-decoration: none;
+    color: black;
 }
 .recipe-primary-info{
     margin-top: 20px;
@@ -141,4 +152,65 @@ input{
     width: 80%;
     font-size: 20px;
     padding: 1rem;
+}
+.tags{
+  display: flex;  
+}
+.tags p{
+    padding: 10px;
+    background-color: #498956;
+    color:white;
+    margin: 20px 10px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+@media only screen and (max-width: 1021px){
+    .recipe-primary-info img{
+      max-width: 350px;
+    }
+}
+
+@media only screen and (max-width: 886px){
+    .header{
+        flex-direction: column;
+    }
+    input{
+        max-width: 100px;
+    }
+    .custom-select{
+        max-width: 100px;  
+        margin-right: 5px;
+    }
+    .submit-btn{
+        margin: 0;
+    }
+    .recipe-primary-info {
+      flex-direction: column;
+    }
+    .title-ingredients-info{
+        padding: 0;
+        margin: 0;
+    }
+    .recipe-primary-info h1{
+      padding: 0;
+      margin: 0;
+      font-size: 25px;
+    }
+    .welcome-text{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .current-page-data{
+        grid-template-columns: repeat(2, 1fr);  
+    }
+    .recipe-display-container img{
+        max-width: 200px;
+        height: 200px;
+    }
+}
+@media only screen and (max-width: 475px){
+    .current-page-data{
+        grid-template-columns: repeat(1, 1fr);  
+    }
 }

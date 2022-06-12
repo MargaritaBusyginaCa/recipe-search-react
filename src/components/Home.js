@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
-import {Link, Routes, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import "../index.css"
-import RecipeDetails from "./RecipeDetails"
 
 function Home(){
     const PER_PAGE = 6
@@ -13,10 +12,9 @@ function Home(){
     const [load, setLoad] = useState(false)
     const [filterParam, setFilterParam] = useState("")
     const isMounted = useRef(false)
-    let apiKey = "c946f13b6a314b0c99f9ab874a602aa7"
+    let apiKey = "d5e511051f14404bb8c1647c9505e18f"
     
-    //https://api.spoonacular.com/recipes/654959/information?apiKey=e0a3d83a76cd454fad56b15153d1d5f6"
-    
+
     let url = `https://api.spoonacular.com/recipes/complexSearch?query=${formData}&cuisine=${filterParam}&apiKey=${apiKey}&number=${queryNum}`
     useEffect(() =>{
       
@@ -32,13 +30,19 @@ function Home(){
     function handleOnChange(e){
         e.preventDefault()
         setFormData(e.target.value)
-        
+
     }
     function findRecipes(){
-        setLoad(prevLoad => !prevLoad)
+       setLoad(prevLoad => !prevLoad)  
     }
     function handlePageClick({selected:selectedPage}){
         setCurrentPage(selectedPage)
+    }
+    function onKeyPress(e){
+      if(e.which === 13) {
+        handleOnChange(e)
+        findRecipes()
+      }
     }
     const offset = currentPage * PER_PAGE
     const currentPageData = recipes
@@ -60,7 +64,6 @@ function Home(){
         <div>
            <div className="header">
               <p className="logo">FoodGuru</p>
-
             <div className="search-filter">
 
             <div className="drop-menu">
@@ -105,8 +108,9 @@ function Home(){
                        name="recipe"
                        placeholder="Search for new recipes"
                        onChange={handleOnChange}
+                       onKeyPress={onKeyPress}  
                 />
-                <button type="button" onClick={findRecipes} className="submit-btn">Search</button>
+                <button type="button" onClick={findRecipes}  className="submit-btn">Search</button>
               </form>
             
               </div>
@@ -130,9 +134,17 @@ function Home(){
          />
          : <div className="welcome--container">
             <div className="welcome-text">
-             <h2>Search for amazing recipes for every ocasion</h2>
-             <p>Vegeterian and Vegan Safe</p>
-             <p>Variety of cusines</p>
+               <h1>Search for amazing recipes for every ocasion</h1>
+              <div className="safe-info">
+               <img src={"https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1654997820~hmac=f43fdda87355f8545bff9f5d76ee0c69"}/>
+               <h3>Variety of cusines</h3>
+              </div>
+              <div className="safe-info">
+               <img src={"https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1654997820~hmac=f43fdda87355f8545bff9f5d76ee0c69"}/>
+               <h3>Vegeterian and Vegan Safe</h3>
+              </div>
+            
+             
              </div>
            </div>
         }
